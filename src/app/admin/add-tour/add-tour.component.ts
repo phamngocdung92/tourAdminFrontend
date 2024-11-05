@@ -18,7 +18,7 @@ export class AddTourComponent implements OnInit {
   tour!: Tour;
 
   selectFile!: File;
-  url: string = 'LinkImage';
+  url: string = 'https://api.cloudinary.com/v1_1/shopdemo/image/upload';
   image: string = this.url;
 
   postForm: FormGroup;
@@ -37,6 +37,7 @@ export class AddTourComponent implements OnInit {
       'tourId': new FormControl(0),
       'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'quantity': new FormControl(null, [Validators.min(1), Validators.required]),
+      'duration': new FormControl(null, [Validators.min(1), Validators.required]),
       'price': new FormControl(null, [Validators.required, Validators.min(1000)]),
       'discount': new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
       'description': new FormControl(null, Validators.required),
@@ -69,6 +70,7 @@ export class AddTourComponent implements OnInit {
       'tourId': new FormControl(0),
       'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
       'quantity': new FormControl(null, [Validators.min(1), Validators.required]),
+      'duration': new FormControl(null, [Validators.min(1), Validators.required]),
       'price': new FormControl(null, [Validators.required, Validators.min(1000)]),
       'discount': new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
       'description': new FormControl(null, Validators.required),

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tour } from '../common/Tour';
+import { TourStatus } from '../common/TourStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,8 @@ export class TourService {
 
   delete(id: number) {
     return this.httpClient.delete(this.url + '/' + id);
+  }
+  closeTour(tourStatus: TourStatus) {
+    return this.httpClient.post(this.url + '/closeTour', tourStatus);
   }
 }

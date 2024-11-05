@@ -12,16 +12,16 @@ export class UploadService {
   uploadTour(file: File): Observable<any> {
     const data = new FormData();
     data.append('file', file);
-    data.append('upload_preset', 'tour-image');
-    data.append('cloud_name', 'slack');
-    return this.http.post('LinkImage', data)
+    data.append('upload_preset', 'shopdemo');
+    data.append('cloud_name', 'shopdemo');
+    return this.http.post('https://api.cloudinary.com/v1_1/shopdemo/image/upload', data)
   }
 
   uploadCustomer(file: File): Observable<any> {
     const data = new FormData();
     data.append('file', file);
-    data.append('upload_preset', 'user-image');
-    data.append('cloud_name', 'slack');
-    return this.http.post('LinkImage', data)
+    data.append('upload_preset', 'shopdemo');
+    data.append('cloud_name', 'shopdemo');
+    return this.http.post('https://api.cloudinary.com/v1_1/shopdemo/image/upload', data)
   }
 }

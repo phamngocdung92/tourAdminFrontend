@@ -18,7 +18,7 @@ export class TourComponent implements OnInit {
   listData!: MatTableDataSource<Tour>;
   tours!: Tour[];
   toursLength!: number;
-  columns: string[] = ['image', 'tourId', 'name', 'price', 'discount', 'category', 'enteredDate', 'view', 'delete'];
+  columns: string[] = ['image', 'tourId', 'name', 'price', 'discount', 'category', 'enteredDate', 'close', 'view', 'delete'];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

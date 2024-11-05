@@ -37,6 +37,12 @@ import { StatisticalCategoryComponent } from './statistical-category/statistical
 import { SoldestComponent } from './soldest/soldest.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import {CloseTourComponent} from './close-tour/close-tour.component';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const routes: Routes = [
   {
@@ -79,9 +85,16 @@ const routes: Routes = [
     EditTourComponent,
     EditCustomerComponent,
     StatisticalCategoryComponent,
-    SoldestComponent
+    SoldestComponent,
+    CloseTourComponent,
   ],
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,

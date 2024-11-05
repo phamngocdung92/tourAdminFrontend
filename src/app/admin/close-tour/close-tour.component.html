@@ -1,0 +1,36 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h2 class="modal-title m-0">Đóng tour</h2>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body p-4">
+        <form [formGroup]="postForm" class="row">
+            <input type="hidden" formControlName='tourId'>
+            <input type="hidden" formControlName="status">
+            <input type="hidden" formControlName="sold">
+            <div class="form-group col-12">
+                <label>Tên tour</label>
+                <div class="form-control-plaintext">{{ postForm.get('name')?.value }}</div>
+            </div>
+        </form>
+        <form [formGroup]="closeForm" class="row">
+            <mat-form-field appearance="fill">
+                <mat-label>Đóng từ ngày</mat-label>
+                <input matInput [matDatepicker]="startPicker" formControlName="from_Date">
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker panelClass="datepicker-overlay"></mat-datepicker>
+            </mat-form-field>
+              
+            <mat-form-field appearance="fill">
+                <mat-label>Đến hết ngày</mat-label>
+                <input matInput [matDatepicker]="endPicker" formControlName="to_Date">
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker panelClass="datepicker-overlay"></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="col-2 m-2" [disabled]="postForm?.invalid" (click)="closeTour()">Đóng tour</button>
+            <button mat-raised-button color="primary" class="col-2 m-2" (click)="c('Close click')">Hủy</button>
+        </form>
+    </div>
+</ng-template>
+<a style="color: steelblue; cursor: pointer;" (click)="open(content)"><i class="far fa-calendar-times"></i></a>

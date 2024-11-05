@@ -37,13 +37,19 @@
                     <small class="invalid-feedback">Khuyến mãi không hợp lệ</small>
                 </div>
             </div>
+            <div class="form-group col-6">
+                <label for="category">Loại tour</label>
+                <select class="custom-select" id="category" formControlName="categoryId">
+                    <option *ngFor="let item of categories" [value]="item.categoryId">{{item.categoryName}}</option>
+                </select>
+            </div>
+            <div class="form-group col-6">
+                <label for="category">Số ngày</label>
+                <input type="number" id="duration" [ngClass]="{'is-invalid':postForm.get('duration')?.touched && postForm.get('duration')?.invalid}" class="form-control" formControlName="duration">
+                <small class="invalid-feedback">Số ngày không hợp lệ</small>
+            </div>
+                
             <div class="col-6 p-0">
-                <div class="form-group col-12">
-                    <label for="category">Loại tour</label>
-                    <select class="custom-select" id="category" formControlName="categoryId">
-                        <option *ngFor="let item of categories" [value]="item.categoryId">{{item.categoryName}}</option>
-                    </select>
-                </div>
                 <div class="form-group col-12">
                     <label for="description">Mô tả tour</label>
                     <textarea type="text" id="description" [ngClass]="{'is-invalid':postForm.get('description')?.touched && postForm.get('description')?.invalid}" class="form-control" rows="6" formControlName="description"></textarea>
