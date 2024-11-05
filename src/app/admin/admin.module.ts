@@ -38,6 +38,7 @@ import { SoldestComponent } from './soldest/soldest.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import {CloseTourComponent} from './close-tour/close-tour.component';
+import {UnavailableTourComponent} from './unavailable-tour/unavailable-tour.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -87,6 +88,7 @@ const routes: Routes = [
     StatisticalCategoryComponent,
     SoldestComponent,
     CloseTourComponent,
+    UnavailableTourComponent,
   ],
   imports: [
     BrowserModule,

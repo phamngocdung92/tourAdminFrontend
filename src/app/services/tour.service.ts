@@ -38,4 +38,7 @@ export class TourService {
   closeTour(tourStatus: TourStatus) {
     return this.httpClient.post(this.url + '/closeTour', tourStatus);
   }
+  getClosedDates(id: number) {
+    return this.httpClient.get(this.url + '/getClosedTourById' + '/' + id);
+  }
 }

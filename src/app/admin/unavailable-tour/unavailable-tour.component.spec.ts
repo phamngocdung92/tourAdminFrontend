@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CloseTourComponent } from './close-tour.component';
+import { UnavailableTourComponent } from './unavailable-tour.component';
 
-describe('CloseTourComponent', () => {
-  let component: CloseTourComponent;
-  let fixture: ComponentFixture<CloseTourComponent>;
+describe('UnavailableTourComponent', () => {
+  let component: UnavailableTourComponent;
+  let fixture: ComponentFixture<UnavailableTourComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CloseTourComponent ]
+      declarations: [ UnavailableTourComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CloseTourComponent);
+    fixture = TestBed.createComponent(UnavailableTourComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -23,7 +23,7 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="tourId">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 12%">Mã tour</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 6%">Mã tour</th>
                     <td mat-cell *matCellDef="let row">{{row.tourId}}</td>
                 </ng-container>
                 <ng-container matColumnDef="name">
@@ -47,19 +47,25 @@
                     <td mat-cell *matCellDef="let row">{{row.enteredDate|date:'dd-MM-yyyy'}}</td>
                 </ng-container>
                 <ng-container matColumnDef="close">
-                    <th mat-header-cell *matHeaderCellDef style="width: 4%;">Đóng tour</th>
+                    <th mat-header-cell *matHeaderCellDef style="width: 6%;">Đóng tour</th>
                     <td mat-cell *matCellDef="let row">
                         <app-close-tour [id]="row.tourId" (editFinish)="finish()"></app-close-tour>
                     </td>
                 </ng-container>
+                <ng-container matColumnDef="unavailableTour">
+                    <th mat-header-cell *matHeaderCellDef style="width: 6%;">Lịch đóng</th>
+                    <td mat-cell *matCellDef="let row">
+                        <app-unavailable-tour [id]="row.tourId" (editFinish)="finish()"></app-unavailable-tour>
+                    </td>
+                </ng-container>
                 <ng-container matColumnDef="view">
-                    <th mat-header-cell *matHeaderCellDef style="width: 4%;">Xem</th>
+                    <th mat-header-cell *matHeaderCellDef style="width: 6%;">Sửa</th>
                     <td mat-cell *matCellDef="let row">
                         <app-edit-tour [id]="row.tourId" (editFinish)="finish()"></app-edit-tour>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="delete">
-                    <th mat-header-cell *matHeaderCellDef style="width: 4%;">Xoá</th>
+                    <th mat-header-cell *matHeaderCellDef style="width: 6%;">Xoá</th>
                     <td mat-cell *matCellDef="let row">
                         <a (click)="delete(row.tourId, row.name)" style="color: steelblue; cursor: pointer;"><i class="fa fa-trash"></i></a>
                     </td>

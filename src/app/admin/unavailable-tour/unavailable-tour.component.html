@@ -1,0 +1,48 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body p-4">
+        <form [formGroup]="postForm" class="row">
+            <div class="container">
+                <div>
+                    <button type="button" class="btn-close-fake" aria-label="Close" (click)="d('Cross click')"></button>
+                </div>
+                <form [formGroup]="postForm" class="row">
+                    <input type="hidden" formControlName='tourId'>
+                    <input type="hidden" formControlName="status">
+                    <input type="hidden" formControlName="sold">
+                    <div class="form-group col-12 text-center">
+                        <label class="center-text">Tên tour</label>
+                        <div class="form-control-plaintext center-text">{{ postForm.get('name')?.value }}</div>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <div class="calendar-header">
+                    <button class="nav-arrow" (click)="previousMonth()">‹</button>
+                    <span class="month-year">
+                        <span>{{ monthName }} </span>
+                        <span>{{ year }}</span>
+                    </span>
+                    <button class="nav-arrow" (click)="nextMonth()">›</button>
+                </div>
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let day of weekDays">{{ day }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let week of getCalendarWeeks()">
+                            <td *ngFor="let day of week" 
+                                [ngClass]="{'closed': day.isClosed}"
+                                [class.empty]="!day.date">
+                                <span *ngIf="day.date">{{ day.date }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button mat-raised-button color="primary" class="col-2 m-2" (click)="c('Close click')">Đóng</button>
+        </form>
+    </div>
+</ng-template>
+<a style="color: steelblue; cursor: pointer;" (click)="open(content)"><i class="far fa-calendar-alt"></i></a>
