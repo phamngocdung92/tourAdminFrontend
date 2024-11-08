@@ -163,32 +163,61 @@ export class UnavailableTourComponent implements OnInit {
     return result;
   }
 
+  // getClosedTourDates() {
+  //   if (!this.id) return;
+    
+  //   this.tourService.getClosedDates(this.id).subscribe({
+  //     next: (data: any) => {
+  //       this.closedDates = [];
+
+  //     for (const item of data) {
+  //       const fromDate = new Date(item.fromDate);
+  //       const toDate = new Date(item.toDate);
+
+  //       for (let d = fromDate; d <= toDate; d.setDate(d.getDate() + 1)) {
+  //         this.closedDates.push(new Date(d));
+  //       }
+  //     }
+
+  //       this.generateCalendar(this.currentDate);
+  //     },
+  //     error: (error) => {
+  //       console.error('Error loading closed dates:', error);
+  //       this.toastr.error('Error loading closed dates!', 'System');
+  //     }
+  //   });
+  // }
+
   getClosedTourDates() {
     if (!this.id) return;
-    
+
     this.tourService.getClosedDates(this.id).subscribe({
       next: (data: any) => {
         this.closedDates = [];
 
-      for (const item of data) {
-        const fromDate = new Date(item.fromDate);
-        const toDate = new Date(item.toDate);
+        if (data.length === 0) {
+          // No closed dates scenario
+          // this.toastr.info('All dates are available for booking.', 'Availability');
+          console.log('All dates are available for booking.');
+        } else {
+          for (const item of data) {
+            const fromDate = new Date(item.fromDate);
+            const toDate = new Date(item.toDate);
 
-        for (let d = fromDate; d <= toDate; d.setDate(d.getDate() + 1)) {
-          this.closedDates.push(new Date(d));
+            for (let d = fromDate; d <= toDate; d.setDate(d.getDate() + 1)) {
+              this.closedDates.push(new Date(d));
+            }
+          }
         }
-      }
 
         this.generateCalendar(this.currentDate);
       },
       error: (error) => {
         console.error('Error loading closed dates:', error);
-        this.toastr.error('Error loading closed dates!', 'System');
+        // this.toastr.error('Error loading closed dates!', 'System');
       }
     });
   }
-
-
 
   formatDateToString(date: Date): string {
     if (!date) return '';
