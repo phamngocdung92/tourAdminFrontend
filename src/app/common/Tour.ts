@@ -12,4 +12,5 @@ export class Tour {
     'category': Category;
     'status': boolean;
     'sold': number;
+    'imageUrls': string[];
 }

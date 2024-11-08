@@ -41,4 +41,7 @@ export class TourService {
   getClosedDates(id: number) {
     return this.httpClient.get(this.url + '/getClosedTourById' + '/' + id);
   }
+  addImagesToTour(id: number, imageUrls: string[]) {
+    return this.httpClient.post(this.url + '/addTourImage'+ '/' + id, imageUrls);
+  }
 }

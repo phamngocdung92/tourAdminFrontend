@@ -20,6 +20,8 @@ export class EditTourComponent implements OnInit {
   selectFile!: File;
   url: string = 'LinkImage';
   image: string = this.url;
+  
+  imageUrls: string[] = [];
 
   postForm: FormGroup;
   categories!: Category[];
@@ -48,20 +50,78 @@ export class EditTourComponent implements OnInit {
     this.getTour();
   }
 
+  // update() {
+  //   if(this.postForm.valid) {
+  //     this.tour = this.postForm.value;
+  //     this.tour.category = new Category(this.postForm.value.categoryId, '');
+  //     this.tour.image = this.image;
+      
+  //     this.tourService.update(this.tour, this.id).subscribe(data=>{
+  //       this.toastr.success('Cập nhật thành công!', 'Hệ thống');
+  //       this.editFinish.emit('done');
+  //     })
+  //   } else {
+  //     this.toastr.error('Hãy kiểm tra lại dữ liệu!', 'Hệ thống');
+  //   }
+  //   this.modalService.dismissAll();
+  // }
+
   update() {
-    if(this.postForm.valid) {
+    if (this.postForm.valid) {
       this.tour = this.postForm.value;
       this.tour.category = new Category(this.postForm.value.categoryId, '');
       this.tour.image = this.image;
-      
-      this.tourService.update(this.tour, this.id).subscribe(data=>{
+      var listUrl = this.imageUrls;
+      this.tourService.save(this.tour).subscribe(data => {
         this.toastr.success('Cập nhật thành công!', 'Hệ thống');
+  
+        if (this.tour.tourId !== 0) {
+          this.tourService.addImagesToTour(this.tour.tourId, listUrl).subscribe(imageData => {
+            this.toastr.success('Images added successfully!', 'System');
+            console.log("add image api: ",imageData);
+          }, error => {
+            this.toastr.error('Error adding images', 'System');
+          });
+        }
+  
         this.editFinish.emit('done');
-      })
+      }, error => {
+        this.toastr.error('Cập nhật thất bại!', 'Hệ thống');
+      });
     } else {
       this.toastr.error('Hãy kiểm tra lại dữ liệu!', 'Hệ thống');
     }
+  
+    // Reset the form after submission
+    this.resetForm();
     this.modalService.dismissAll();
+  }
+
+
+  onImageUrlsChange(event: any) {
+    // Capture multiple image URLs input (comma-separated)
+    const inputElement = event.target as HTMLInputElement;
+  const urls = inputElement.value.split(',');  // Assuming user inputs URLs separated by commas
+  this.imageUrls = urls.map(url => url.trim());  // Clean up any extra spaces
+  console.log("list url: ",this.imageUrls);
+  }
+  private resetForm() {
+    this.postForm = new FormGroup({
+      'tourId': new FormControl(0),
+      'name': new FormControl(null, [Validators.minLength(4), Validators.required]),
+      'quantity': new FormControl(null, [Validators.min(1), Validators.required]),
+      'duration': new FormControl(null, [Validators.min(1), Validators.required]),
+      'price': new FormControl(null, [Validators.required, Validators.min(1000)]),
+      'discount': new FormControl(null, [Validators.required, Validators.min(0), Validators.max(100)]),
+      'description': new FormControl(null, Validators.required),
+      'enteredDate': new FormControl(new Date()),
+      'categoryId': new FormControl(1),
+      'status': new FormControl(1),
+      'sold': new FormControl(0),
+      'imageUrls': new FormControl([]),  // Reset the image URLs
+    })
+    this.image = this.url;
+    this.imageUrls = [];  // Reset the image URLs list
   }
 
   getTour() {
