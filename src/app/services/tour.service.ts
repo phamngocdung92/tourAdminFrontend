@@ -21,7 +21,7 @@ export class TourService {
   }
 
   getBestSeller() {
-    return this.httpClient.get(this.url + '/bestseller-admin');
+    return this.httpClient.get(this.url + '/bestseller');
   }
 
   save(tour: Tour) {
